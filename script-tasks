@@ -1,0 +1,39 @@
+### С помощью конструкции case напишите скрипт, который принимает на вход exit_code команды curl и для первых четырех кодов возврата печатает описание соответствующего кода возврата.
+### А для остальных кодов возврата печатает ERROR: $exit_code
+#!/bin/bash
+exit_code=$1
+if [ $exit_code -le 4 ]; then
+        case $exit_code in
+                1) echo "Unsupported protocol. This build of curl has no support
+              for this protocol.";;
+                2) echo "Failed to initialize.";;
+                3) echo "URL malformed. The syntax was not correct.";;
+                4) echo "A feature or option that was needed to perform the desired
+              request was not enabled or was explicitly disabled at
+              build-time. To make curl able to do this, you probably
+              need another build of libcurl!";;
+        esac
+else
+echo ERROR: $exit_code
+fi
+
+
+### Только нечетные строки
+
+#!/bin/bash
+IFS=$'\n'
+file="test1.txt"
+let i=0
+while read line;
+do
+(( i++ )) 
+      if  [ $((i % 2)) != 0 ]
+      then
+      
+          echo $line
+      fi
+done < $file
+
+
+### список всех доступных на исполнение файлов в текущей директории
+ls | while read f; do [ -f $f ] && [ -x $f ] && echo ${f}; done
