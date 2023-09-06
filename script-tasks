@@ -77,3 +77,6 @@ date=$year"-"$month"-"$day
          find -name "*$x*.*xml" | xargs tar -zcf /home/nspkop/bc/from_bo_bc/$date"_from_bo.tar.gz" --remove-files
     done
 done
+
+### SCP example + aes256
+scp -c aes256-ctr -C -r  ~/directory john@127.1.1.11:~/
