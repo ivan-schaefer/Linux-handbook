@@ -54,3 +54,26 @@ do
       count=`expr $count + 1`
 done
 
+### Замените командой sed в файле /etc/os-release NAME="Ubuntu" на NAME="MyUbuntu".
+sudo sed -i 's/NAME="Ubuntu"/NAME="MyUbuntu"/' /etc/os-release --follow-symlinks
+
+###  из /etc/passwd имя текущего пользователя и его командную оболочку
+awk '{print $0}' /etc/passwd | grep $USER
+
+### find and tar
+
+#!/bin/bash
+dir='/home/nspkop/ipps/router/fromBO/arch'
+cd /home/nspkop/ipps/router/fromBO/arch
+until [ `ls -1 | wc -l` == 0 ]
+do
+x=`ls -1 | awk '{print substr($0,18, 44-36)}' | head -n 1`
+year=`ls -1 | awk '{print substr($0,18, 44-40)}' | head -n 1`
+month=`ls -1 | awk '{print substr($0,22, 44-42)}' | head -n 1`
+day=` ls -1 | awk '{print substr($0,24, 44-42)}' | head -n 1`
+date=$year"-"$month"-"$day
+    for file in $dir
+    do
+         find -name "*$x*.*xml" | xargs tar -zcf /home/nspkop/bc/from_bo_bc/$date"_from_bo.tar.gz" --remove-files
+    done
+done
