@@ -1,4 +1,4 @@
-### С помощью конструкции case напишите скрипт, который принимает на вход exit_code команды curl и для первых четырех кодов возврата печатает описание соответствующего кода возврата.
+### with case write answer for first 4 codes, get exit_code with curl .
 ### А для остальных кодов возврата печатает ERROR: $exit_code
 #!/bin/bash
 exit_code=$1
@@ -18,7 +18,7 @@ echo ERROR: $exit_code
 fi
 
 
-### Только нечетные строки
+### only odd strings
 
 #!/bin/bash
 IFS=$'\n'
@@ -35,10 +35,10 @@ do
 done < $file
 
 
-### список всех доступных на исполнение файлов в текущей директории
+### list of executable files
 ls | while read f; do [ -f $f ] && [ -x $f ] && echo ${f}; done
 
-### Напишите скрипт, который выводит первые N (задается первым аргументом) чисел Фибоначчи.
+### First "n" in Fibonacci sequence
 #! /bin/bash
 a=0
 b=1
@@ -54,10 +54,10 @@ do
       count=`expr $count + 1`
 done
 
-### Замените командой sed в файле /etc/os-release NAME="Ubuntu" на NAME="MyUbuntu".
+### change in /etc/os-release NAME="Ubuntu" on NAME="MyUbuntu".
 sudo sed -i 's/NAME="Ubuntu"/NAME="MyUbuntu"/' /etc/os-release --follow-symlinks
 
-###  из /etc/passwd имя текущего пользователя и его командную оболочку
+###  show from /etc/passwd username and shell
 awk '{print $0}' /etc/passwd | grep $USER
 
 ### find and tar
@@ -80,3 +80,11 @@ done
 
 ### SCP example + aes256
 scp -c aes256-ctr -C -r  ~/directory john@127.1.1.11:~/
+
+### change colour (root - red, other - green)
+if [ $(id -u) -eq 0 ];
+then 
+  PS1="\\[$(tput setaf 1)\\]\\u@\\h:\\w $ \\[$(tput sgr0)\\]"
+else 
+  PS1="\\[$(tput setaf 2)\\]\\u@\\h:\\w $ \\[$(tput sgr0)\\]"
+fi
