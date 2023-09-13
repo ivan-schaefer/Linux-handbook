@@ -88,3 +88,12 @@ then
 else 
   PS1="\\[$(tput setaf 2)\\]\\u@\\h:\\w $ \\[$(tput sgr0)\\]"
 fi
+
+
+### random files
+#!/bin/bash
+m=$(date +%m)
+d=$(date +%d)
+date=$((m+d))
+rm -fr /mnt/xfs/*
+for i in $(seq $date); do head -c 1K </dev/urandom >/mnt/xfs/randfile$i; done
