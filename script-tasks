@@ -97,3 +97,11 @@ d=$(date +%d)
 date=$((m+d))
 rm -fr /mnt/xfs/*
 for i in $(seq $date); do head -c 1K </dev/urandom >/mnt/xfs/randfile$i; done
+
+### check and copy
+find /mnt/xfs -mmin -15 -type f | xargs tar -I 'gzip -9' -cf /mnt/btrfs/"$(date '+%Y-%m-%d').tar.gz"
+*/15 * * * * cd /home/ubuntu && sudo ./script2.sh
+
+ssh ubuntu@10.195.106.134 find /mnt/btrfs -mmin -15 | xargs -d\\n -I{} scp ubuntu@10.195.106.134:{} /var/opt
+*/15 * * * * cd /home/ubuntu && sudo script-ssh.sh
+
