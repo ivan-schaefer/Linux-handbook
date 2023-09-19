@@ -105,3 +105,4 @@ find /mnt/xfs -mmin -15 -type f | xargs tar -I 'gzip -9' -cf /mnt/btrfs/"$(date 
 ssh ubuntu@10.195.106.134 find /mnt/btrfs -mmin -15 | xargs -d\\n -I{} scp ubuntu@10.195.106.134:{} /var/opt
 */15 * * * * cd /home/ubuntu && sudo script-ssh.sh
 
+### new script
