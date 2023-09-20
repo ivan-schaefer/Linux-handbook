@@ -12,6 +12,7 @@ vasya server1=(ALL:ALL)  ALL
 #vasya all rights but only under user1
 vasya server1=(user1:user1)  ALL
 
+
 #vasya all rights but no pass tcpdump
 
 vasya ALL=(ALL) NOPASSWD: /usr/sbin/tcpdump
