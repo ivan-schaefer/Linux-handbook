@@ -24,3 +24,19 @@ iptables -t nat -A POSTROUTING -s 192.168.1.15 -j SNAT --to-destination 1.1.1.1 
 vim /etc/ufw/before.rules
 -A PREROUTING -d 1.1.1.1 -i eth0 -j DNAT --to-destination 192.168.1.15
 -A POSTROUTING -s 192.168.1.15 -j SNAT --to-destination 1.1.1.1 -o eth0
+
+### Routing
+ifconfig eth0 <IP> netmask <netmask>
+ifconfig eth0 10.0.2.1 netmask 255.255.255.0
+ip route add <gateway IP> dev <interface on which it should be reachable>
+ip route add 10.0.2.254 dev eth0
+ip route add default via <gateway IP>
+ip route add default via 10.0.2.254
+
+#Router
+cat /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/ip_forward
+ifconfig eth0 1.1.1.2 netmask 255.255.255.252
+ifconfig eth1 10.0.1.254 netmask 255.255.255.0
+ifconfig eth2 10.0.2.254 netmask 255.255.255.0
+ifconfig eth3 10.0.3.254 netmask 255.255.255.0
